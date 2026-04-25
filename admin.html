@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Dashboard | Love First Church</title>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+    <style>
+        .dashboard-wrapper {
+            width: 100%;
+            max-width: 1200px;
+            z-index: 10;
+            padding: 20px;
+        }
+
+        .dashboard-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 40px;
+        }
+
+        .dashboard-header h1 {
+            font-size: 2.2rem;
+            color: white;
+            font-weight: 600;
+        }
+
+        .btn-back {
+            background: rgba(255, 255, 255, 0.1);
+            color: white;
+            text-decoration: none;
+            padding: 10px 20px;
+            border-radius: 8px;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            transition: all 0.3s ease;
+        }
+
+        .btn-back:hover {
+            background: rgba(255, 255, 255, 0.2);
+        }
+
+        .dashboard-container {
+            background: var(--bg-card);
+            backdrop-filter: blur(24px);
+            -webkit-backdrop-filter: blur(24px);
+            border: 1px solid var(--border-card);
+            border-radius: 24px;
+            padding: 40px;
+            box-shadow: 0 30px 60px rgba(0, 0, 0, 0.4);
+            overflow-x: auto;
+        }
+
+        .members-table {
+            width: 100%;
+            border-collapse: collapse;
+            color: white;
+            min-width: 800px;
+        }
+
+        .members-table th, .members-table td {
+            padding: 15px 20px;
+            text-align: left;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .members-table th {
+            font-weight: 600;
+            color: var(--color-cyan);
+            text-transform: uppercase;
+            font-size: 0.85rem;
+            letter-spacing: 1px;
+        }
+
+        .members-table tbody tr {
+            transition: background 0.3s ease;
+        }
+
+        .members-table tbody tr:hover {
+            background: rgba(255, 255, 255, 0.05);
+        }
+
+        .badge {
+            background: rgba(247, 147, 30, 0.2);
+            color: var(--color-orange);
+            padding: 4px 10px;
+            border-radius: 50px;
+            font-size: 0.8rem;
+            font-weight: 600;
+        }
+
+        .loader {
+            text-align: center;
+            padding: 50px;
+            color: var(--text-muted);
+            font-size: 1.2rem;
+        }
+
+        .error-state {
+            text-align: center;
+            padding: 40px;
+            background: rgba(211, 26, 44, 0.1);
+            border: 1px solid rgba(211, 26, 44, 0.3);
+            border-radius: 12px;
+            color: #ffdae2;
+            margin-bottom: 20px;
+        }
+    </style>
+    <!-- Supabase JS CDN -->
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    <script src="admin.js" defer></script>
+</head>
+<body>
+    <div class="background-container">
+        <div class="orb orb-1"></div>
+        <div class="orb orb-2"></div>
+        <div class="orb orb-3"></div>
+    </div>
+
+    <main class="dashboard-wrapper">
+        <div class="dashboard-header">
+            <h1>Members Directory</h1>
+            <a href="index.html" class="btn-back">← Back to Home</a>
+        </div>
+
+        <div class="dashboard-container">
+            <div id="loader" class="loader">Loading members data...</div>
+            <div id="errorState" class="error-state" style="display: none;"></div>
+            
+            <table class="members-table" id="membersTable" style="display: none;">
+                <thead>
+                    <tr>
+                        <th>Member ID</th>
+                        <th>Name</th>
+                        <th>Gender</th>
+                        <th>Age</th>
+                        <th>Email</th>
+                        <th>Phone</th>
+                        <th>Location</th>
+                        <th>Date Joined</th>
+                    </tr>
+                </thead>
+                <tbody id="membersTableBody">
+                    <!-- Data will be populated here -->
+                </tbody>
+            </table>
+        </div>
+    </main>
+</body>
+</html>

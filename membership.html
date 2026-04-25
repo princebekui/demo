@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Church Membership Form | Love First</title>
+    <!-- Importing modern Outfit font -->
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+    
+    <!-- Supabase JS CDN -->
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    <script src="script.js" defer></script>
+</head>
+<body>
+    <div class="background-container">
+        <!-- Floating orbs for gradient effects based on artwork -->
+        <div class="orb orb-1"></div>
+        <div class="orb orb-2"></div>
+        <div class="orb orb-3"></div>
+    </div>
+
+    <main class="form-wrapper">
+        <header class="form-header">
+            <img src="logo.jpg" alt="Love First Church Logo" class="main-logo">
+            <h2>Membership Form</h2>
+            <p>Please fill in our church membership form below with your information to become a member of our Church.</p>
+            <div class="notice">
+                This church membership form can be completed only by adults. If you're less than 18, provide the email address of a parent.
+            </div>
+        </header>
+
+        <div class="form-container">
+            <!-- Success Message (Hidden by default) -->
+            <div id="successState" style="display: none; text-align: center; padding: 40px 20px;">
+                <div style="width: 80px; height: 80px; background: rgba(30, 184, 110, 0.15); border-radius: 50%; display: flex; justify-content: center; align-items: center; margin: 0 auto 25px; border: 2px solid #1eb86e; box-shadow: 0 0 20px rgba(30, 184, 110, 0.3);">
+                    <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="#1eb86e" stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
+                        <polyline points="20 6 9 17 4 12"></polyline>
+                    </svg>
+                </div>
+                <h2 style="font-size: 2.2rem; color: #fff; margin-bottom: 15px; font-weight: 500;">Registration Successful!</h2>
+                <p style="color: var(--text-muted); font-size: 1.1rem; line-height: 1.6; max-width: 400px; margin: 0 auto;">Thank you for registering. Your details have been submitted to Love First Church.</p>
+            </div>
+
+            <form id="membershipForm">
+                <!-- Name Field -->
+                <div class="form-group row">
+                    <label>Name<span class="required">*</span></label>
+                    <div class="input-row">
+                        <div class="input-box">
+                            <input type="text" id="firstName" name="firstName" required placeholder="First">
+                        </div>
+                        <div class="input-box">
+                            <input type="text" id="lastName" name="lastName" required placeholder="Last">
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Gender Field -->
+                <div class="form-group">
+                    <label>Gender</label>
+                    <div class="radio-group">
+                        <label class="radio-label">
+                            <input type="radio" name="gender" value="male">
+                            <span class="custom-radio"></span> Male
+                        </label>
+                        <label class="radio-label">
+                            <input type="radio" name="gender" value="female">
+                            <span class="custom-radio"></span> Female
+                        </label>
+                    </div>
+                </div>
+
+                <!-- Age Field -->
+                <div class="form-group">
+                    <label for="age">Age<span class="required">*</span></label>
+                    <input type="number" id="age" name="age" required min="0" max="150" placeholder="00">
+                </div>
+
+                <!-- Email Field -->
+                <div class="form-group">
+                    <label for="email">Email<span class="required">*</span></label>
+                    <input type="email" id="email" name="email" required placeholder="example@email.com">
+                    <span class="hint">If you're less than 18, provide the email address of a parent.</span>
+                </div>
+
+                <!-- Phone Field -->
+                <div class="form-group">
+                    <label for="phone">Phone</label>
+                    <input type="tel" id="phone" name="phone" placeholder="### ### ####">
+                </div>
+
+                <!-- Address Field -->
+                <div class="form-group address-group">
+                    <label>Address<span class="required">*</span></label>
+                    <div class="input-box w-full mb-10">
+                        <input type="text" id="street" name="street" required placeholder="Street Address">
+                    </div>
+                    
+                    <div class="input-row">
+                        <div class="input-box">
+                            <input type="text" id="city" name="city" required placeholder="City">
+                        </div>
+                        <div class="input-box select-wrapper">
+                            <select id="country" name="country">
+                                <option value="" disabled selected>Country</option>
+                                <option value="GH">Ghana</option>
+                                <option value="TG">Togo</option>
+                                <option value="NG">Nigeria</option>
+                                <option value="US">United States</option>
+                                <option value="CA">Canada</option>
+                                <option value="UK">United Kingdom</option>
+                                <option value="AU">Australia</option>
+                                <option value="Other">Other</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="submit-container">
+                    <button type="submit" class="submit-btn" id="submitBtn">
+                        <span class="btn-text">Submit Registration</span>
+                        <div class="btn-background"></div>
+                    </button>
+                </div>
+            </form>
+        </div>
+    </main>
+
+    <!-- Toast Notification Container -->
+    <div id="toast" class="toast hidden">
+        <span id="toastMessage">Success message goes here.</span>
+    </div>
+</body>
+</html>
