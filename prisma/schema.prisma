@@ -1,0 +1,29 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+}
+
+/// The Member model maps directly to the 'member' table in your Supabase database.
+model Member {
+  member_id  String   @id @map("member_id")
+  first_name String   @map("first_name")
+  last_name  String   @map("last_name")
+  gender     String?  @map("gender")
+  age        Int      @map("age")
+  email      String   @map("email")
+  phone      String?  @map("phone")
+  street     String   @map("street")
+  city       String   @map("city")
+  country    String   @map("country")
+  
+  // This records the exact time the member registered, defaulting to the current timestamp
+  created_at DateTime @default(now()) @map("created_at")
+
+  @@map("member")
+}

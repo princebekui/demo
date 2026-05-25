@@ -1,21 +1,16 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Welcome to Love First Church</title>
     <!-- Importing modern Outfit font -->
-    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&display=swap"
+        rel="stylesheet">
     <link rel="stylesheet" href="style.css">
     <style>
-        /* Specific Home Page Styles */
-        .hero-container {
-            text-align: center;
-            z-index: 10;
-            max-width: 800px;
-            padding: 40px;
-        }
-
+        /* Specific Home Page Animations kept inline for fast load */
         .hero-logo {
             max-width: 350px;
             margin-bottom: 20px;
@@ -29,7 +24,7 @@
             font-weight: 700;
             margin-bottom: 20px;
             color: #fff;
-            text-shadow: 0 5px 15px rgba(0,0,0,0.5);
+            text-shadow: 0 5px 15px rgba(0, 0, 0, 0.5);
             animation: fadeInUp 1s ease-out 0.2s both;
         }
 
@@ -38,6 +33,7 @@
             color: rgba(255, 255, 255, 0.85);
             margin-bottom: 40px;
             line-height: 1.6;
+            max-width: 800px;
             animation: fadeInUp 1s ease-out 0.4s both;
         }
 
@@ -45,6 +41,7 @@
             display: flex;
             gap: 20px;
             justify-content: center;
+            flex-wrap: wrap;
             animation: fadeInUp 1s ease-out 0.6s both;
         }
 
@@ -86,26 +83,42 @@
         }
 
         @keyframes fadeInUp {
-            from { opacity: 0; transform: translateY(30px); }
-            to { opacity: 1; transform: translateY(0); }
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
         }
 
         @keyframes fadeInDown {
-            from { opacity: 0; transform: translateY(-30px); }
-            to { opacity: 1; transform: translateY(0); }
+            from {
+                opacity: 0;
+                transform: translateY(-30px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
         }
 
         @media (max-width: 600px) {
             .hero-actions {
                 flex-direction: column;
             }
+
             .hero-title {
                 font-size: 2.5rem;
             }
         }
     </style>
 </head>
-<body>
+
+<body class="home-page">
     <div class="background-container">
         <!-- Floating orbs for gradient effects -->
         <div class="orb orb-1"></div>
@@ -113,15 +126,120 @@
         <div class="orb orb-3"></div>
     </div>
 
-    <main class="hero-container">
+    <!-- Hero Section -->
+    <header class="home-hero">
         <img src="logo.jpg" alt="Love First Church" class="hero-logo">
         <h1 class="hero-title">Welcome Home</h1>
-        <p class="hero-subtitle">Experience God's love, grow in faith, and connect with a family that puts love first. We invite you to join our growing community.</p>
-        
+        <p class="hero-subtitle">Experience God's love, grow in faith, and connect with a family that puts love first.
+            We invite you to join our growing community.</p>
+
         <div class="hero-actions">
+            <a href="#why-join" class="btn-secondary">Learn More</a>
             <a href="membership.html" class="btn-primary">Become a Member</a>
-            <a href="admin.html" class="btn-secondary">Admin Dashboard</a>
+            <a href="http://www.youtube.com/@LoveFirstChurchOfficial" target="_blank" class="btn-secondary" style="background: rgba(255, 0, 0, 0.1); border-color: rgba(255, 0, 0, 0.3);">Listen to Messages</a>
         </div>
-    </main>
+    </header>
+
+    <!-- Why Join Us Section -->
+    <section id="why-join" class="home-section">
+        <h2 class="section-title">Why Join <span>Love First?</span></h2>
+        <div class="features-grid">
+            <div class="feature-card">
+                <div class="feature-icon">❤️</div>
+                <h3>Authentic Love</h3>
+                <p>We believe in a community where everyone is welcomed, accepted, and loved exactly as they are. Find
+                    your family here.</p>
+            </div>
+            <div class="feature-card">
+                <div class="feature-icon">🌱</div>
+                <h3>Spiritual Growth</h3>
+                <p>Through powerful worship and practical biblical teaching, we provide the tools you need to deepen
+                    your faith and discover your purpose.</p>
+            </div>
+            <div class="feature-card">
+                <div class="feature-icon">🤝</div>
+                <h3>Impactful Service</h3>
+                <p>We don't just go to church; we are the church. Join us in making a tangible difference in our city
+                    and around the world.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Youth & Community Section -->
+    <section class="home-section split-section">
+        <div class="split-content">
+            <h2 class="section-title" style="text-align: left; margin-bottom: 20px;">A Church Alive With <span>Youthful Energy</span></h2>
+            <p style="font-size: 1.15rem; line-height: 1.7; color: rgba(255, 255, 255, 0.85); margin-bottom: 20px;">
+                Love First Church isn't just another traditional establishment; it's a vibrant, dynamic movement driven by a passionate, youthful generation. The majority of our congregation is composed of young adults, students, and young professionals who are eager to make an impact in the world.
+            </p>
+            <p style="font-size: 1.15rem; line-height: 1.7; color: rgba(255, 255, 255, 0.85); margin-bottom: 35px;">
+                We blend modern worship, relevant teaching, and a genuine sense of community to create an environment where the next generation can thrive spiritually and socially. Find your tribe with us!
+            </p>
+            
+            <ul class="youth-highlights">
+                <li>
+                    <div class="highlight-icon">🔥</div>
+                    <span><strong>Passionate Worship:</strong> High-energy, contemporary music</span>
+                </li>
+                <li>
+                    <div class="highlight-icon">💡</div>
+                    <span><strong>Relevant Teaching:</strong> Practical wisdom for modern challenges</span>
+                </li>
+                <li>
+                    <div class="highlight-icon">🌐</div>
+                    <span><strong>Strong Community:</strong> Small groups, networking, and social events</span>
+                </li>
+            </ul>
+        </div>
+        <div class="split-image">
+            <img src="WhatsApp Image 2026-05-08 at 20.03.11.jpeg" alt="Youthful congregation at Love First Church">
+        </div>
+    </section>
+
+    <!-- Gallery Section -->
+    <section class="home-section">
+        <h2 class="section-title">Experience <span>The Vibe</span></h2>
+        <div class="gallery-grid">
+            <div class="gallery-item">
+                <img src="worship.png" alt="Modern church worship service">
+                <div class="gallery-caption">Vibrant Worship</div>
+            </div>
+            <div class="gallery-item">
+                <img src="fellowship.png" alt="Community gathering and fellowship">
+                <div class="gallery-caption">Lifelong Friendships</div>
+            </div>
+            <div class="gallery-item">
+                <img src="LOVEFIRSTArtboard 2.jpg.jpeg" alt="Love First Church Service">
+                <div class="gallery-caption">Sunday Service</div>
+            </div>
+            <div class="gallery-item">
+                <img src="LOVEFIRSTArtboard 4.jpg.jpeg" alt="Love First Church Atmosphere">
+                <div class="gallery-caption">Atmosphere</div>
+            </div>
+            <div class="gallery-item">
+                <img src="LOVEFIRSTArtboard 6.jpg.jpeg" alt="Love First Church Community">
+                <div class="gallery-caption">Community</div>
+            </div>
+            <div class="gallery-item">
+                <img src="LOVEFIRSTArtboard 9.jpg.jpeg" alt="Love First Church Worship">
+                <div class="gallery-caption">Experience Love</div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="home-footer">
+        <h2>Ready to take the next step?</h2>
+        <p style="color: var(--text-muted); margin-bottom: 30px; font-size: 1.1rem;">Join our community today and start
+            your journey with us.</p>
+        <div class="hero-actions">
+            <a href="membership.html" class="btn-primary">Join the Church</a>
+            <a href="http://www.youtube.com/@LoveFirstChurchOfficial" target="_blank" class="btn-secondary" style="background: rgba(255, 0, 0, 0.1); border-color: rgba(255, 0, 0, 0.3);">Listen to Messages</a>
+            <a href="admin.html" class="btn-secondary">Admin Access</a>
+        </div>
+        <p style="color: rgba(255,255,255,0.3); margin-top: 50px; font-size: 0.9rem;">&copy; 2026 Love First Church. All
+            rights reserved.</p>
+    </footer>
 </body>
+
 </html>

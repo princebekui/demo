@@ -1,0 +1,29 @@
+{
+  "name": "anti-gravity-poject",
+  "version": "1.0.0",
+  "description": "",
+  "main": "admin.js",
+  "scripts": {
+    "dev": "lite-server",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/princebekui/demo.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs",
+  "bugs": {
+    "url": "https://github.com/princebekui/demo/issues"
+  },
+  "homepage": "https://github.com/princebekui/demo#readme",
+  "devDependencies": {
+    "lite-server": "^2.6.1",
+    "prisma": "^7.8.0"
+  },
+  "dependencies": {
+    "dotenv": "^17.4.2"
+  }
+}

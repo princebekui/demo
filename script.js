@@ -2,7 +2,7 @@
 // These are the details you provided. 
 // If your table is named differently in Supabase, change 'members' below!
 const SUPABASE_URL = 'https://cmfutlhzjziecydqmerz.supabase.co';
-const SUPABASE_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImNtZnV0bGh6anppZWN5ZHFtZXJ6Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzYxMzgyODUsImV4cCI6MjA5MTcxNDI4NX0.bvduJBSMS_qVqy-CxLBg_z-UlIIpAMkUFR5u5qdf1oI';
+const SUPABASE_KEY = 'sb_publishable_g7TpDSC2HGQyVtknNeP4yQ_dfGkUreu';
 const TABLE_NAME = 'member'; // Make sure this perfectly matches your Supabase table name
 
 // Initialize Supabase client
@@ -41,6 +41,7 @@ document.addEventListener('DOMContentLoaded', () => {
             street: formData.get('street'),
             city: formData.get('city'),
             country: formData.get('country')
+            // Note: Add 'created_at' column (timestamptz, default now()) in Supabase to record registration time
         };
 
         if (!data.gender) {

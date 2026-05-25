@@ -29,19 +29,6 @@
             font-weight: 600;
         }
 
-        .btn-back {
-            background: rgba(255, 255, 255, 0.1);
-            color: white;
-            text-decoration: none;
-            padding: 10px 20px;
-            border-radius: 8px;
-            border: 1px solid rgba(255, 255, 255, 0.2);
-            transition: all 0.3s ease;
-        }
-
-        .btn-back:hover {
-            background: rgba(255, 255, 255, 0.2);
-        }
 
         .dashboard-container {
             background: var(--bg-card);
@@ -215,7 +202,7 @@
             <input type="password" id="adminPassword" class="login-input" placeholder="••••••••">
             <button id="btnLogin" class="login-btn">Unlock Dashboard</button>
             <div id="loginError">Incorrect password. Please try again.</div>
-            <a href="index.html" style="display: block; margin-top: 20px; color: var(--text-muted); text-decoration: none; font-size: 0.9rem;">&larr; Return to Home</a>
+            <a href="index.html" class="btn-back" style="margin-top: 20px; display: inline-flex;">← Return to Home</a>
         </div>
     </div>
 

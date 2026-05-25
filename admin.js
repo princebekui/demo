@@ -1,6 +1,6 @@
 // --- SUPABASE CONFIGURATION ---
 const SUPABASE_URL = 'https://cmfutlhzjziecydqmerz.supabase.co';
-const SUPABASE_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImNtZnV0bGh6anppZWN5ZHFtZXJ6Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzYxMzgyODUsImV4cCI6MjA5MTcxNDI4NX0.bvduJBSMS_qVqy-CxLBg_z-UlIIpAMkUFR5u5qdf1oI';
+const SUPABASE_KEY = 'sb_publishable_g7TpDSC2HGQyVtknNeP4yQ_dfGkUreu';
 const TABLE_NAME = 'member';
 
 const supabaseClient = window.supabase.createClient(SUPABASE_URL, SUPABASE_KEY);
@@ -67,11 +67,13 @@ async function loadDashboardData() {
         data.forEach(member => {
             const tr = document.createElement('tr');
 
-            // Format date if it exists
+            // Format date and time if it exists
             let dateStr = 'N/A';
             if (member.created_at) {
                 const d = new Date(member.created_at);
-                dateStr = d.toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' });
+                const optionsDate = { month: 'short', day: 'numeric', year: 'numeric' };
+                const optionsTime = { hour: '2-digit', minute: '2-digit' };
+                dateStr = `${d.toLocaleDateString('en-US', optionsDate)} @ ${d.toLocaleTimeString('en-US', optionsTime)}`;
             }
 
             tr.innerHTML = `
