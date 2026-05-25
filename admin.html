@@ -1,10 +1,12 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Admin Dashboard | Love First Church</title>
-    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&display=swap"
+        rel="stylesheet">
     <link rel="stylesheet" href="style.css">
     <style>
         .dashboard-wrapper {
@@ -59,7 +61,8 @@
             min-width: 800px;
         }
 
-        .members-table th, .members-table td {
+        .members-table th,
+        .members-table td {
             padding: 15px 20px;
             text-align: left;
             border-bottom: 1px solid rgba(255, 255, 255, 0.1);
@@ -106,28 +109,138 @@
             color: #ffdae2;
             margin-bottom: 20px;
         }
+        
+        /* Admin Login Overlay Styles */
+        #loginOverlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: var(--bg-dark);
+            z-index: 2000;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            backdrop-filter: blur(20px);
+        }
+
+        .login-card {
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 20px;
+            padding: 40px;
+            width: 90%;
+            max-width: 400px;
+            text-align: center;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.5);
+        }
+
+        .login-card h2 {
+            color: white;
+            margin-bottom: 10px;
+            font-size: 1.8rem;
+        }
+        
+        .login-card p {
+            color: var(--text-muted);
+            margin-bottom: 25px;
+            font-size: 0.95rem;
+        }
+
+        .login-input {
+            width: 100%;
+            padding: 15px;
+            border-radius: 12px;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            background: rgba(0, 0, 0, 0.2);
+            color: white;
+            font-family: inherit;
+            font-size: 1rem;
+            outline: none;
+            margin-bottom: 20px;
+            text-align: center;
+            letter-spacing: 2px;
+            transition: border-color 0.3s ease;
+        }
+        
+        .login-input:focus {
+            border-color: var(--color-cyan);
+        }
+
+        .login-btn {
+            background: linear-gradient(90deg, var(--color-blue), var(--color-cyan));
+            border: none;
+            color: #0a0a0a;
+            padding: 15px;
+            width: 100%;
+            border-radius: 12px;
+            cursor: pointer;
+            font-family: inherit;
+            font-size: 1.1rem;
+            font-weight: 700;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .login-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 20px rgba(0, 240, 255, 0.3);
+        }
+        
+        #loginError {
+            color: #ff4757;
+            font-size: 0.9rem;
+            margin-top: 15px;
+            display: none;
+        }
     </style>
-    <!-- Supabase JS CDN -->
+    <!-- EmailJS SDK -->
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js"></script>
+    <script type="text/javascript">
+        (function () {
+            // Placeholder: The user will need to replace this with their actual Public Key
+            emailjs.init("RdyuHxDr-1Znhuhe0");
+        })();
+    </script>
     <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
     <script src="admin.js" defer></script>
 </head>
+
 <body>
+    <!-- Login Overlay -->
+    <div id="loginOverlay">
+        <div class="login-card">
+            <h2>Admin Access</h2>
+            <p>Enter the master password to view the directory.</p>
+            <input type="password" id="adminPassword" class="login-input" placeholder="••••••••">
+            <button id="btnLogin" class="login-btn">Unlock Dashboard</button>
+            <div id="loginError">Incorrect password. Please try again.</div>
+            <a href="index.html" style="display: block; margin-top: 20px; color: var(--text-muted); text-decoration: none; font-size: 0.9rem;">&larr; Return to Home</a>
+        </div>
+    </div>
+
     <div class="background-container">
         <div class="orb orb-1"></div>
         <div class="orb orb-2"></div>
         <div class="orb orb-3"></div>
     </div>
 
-    <main class="dashboard-wrapper">
+    <main class="dashboard-wrapper" id="mainDashboard" style="display: none;">
         <div class="dashboard-header">
             <h1>Members Directory</h1>
-            <a href="index.html" class="btn-back">← Back to Home</a>
+            <div style="display: flex; gap: 15px;">
+                <button id="btnComposeEmail" class="btn-back"
+                    style="background: var(--color-blue); border-color: var(--color-blue); cursor: pointer;">
+                    ✉️ Compose Email
+                </button>
+                <a href="index.html" class="btn-back">← Back to Home</a>
+            </div>
         </div>
 
         <div class="dashboard-container">
             <div id="loader" class="loader">Loading members data...</div>
             <div id="errorState" class="error-state" style="display: none;"></div>
-            
+
             <table class="members-table" id="membersTable" style="display: none;">
                 <thead>
                     <tr>
@@ -147,5 +260,45 @@
             </table>
         </div>
     </main>
+
+    <!-- Email Composition Modal -->
+    <div id="emailModal"
+        style="display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0, 0, 0, 0.7); z-index: 1000; justify-content: center; align-items: center; backdrop-filter: blur(10px);">
+        <div
+            style="background: var(--bg-card); border: 1px solid var(--border-card); border-radius: 20px; padding: 40px; width: 90%; max-width: 600px; box-shadow: 0 20px 40px rgba(0,0,0,0.5);">
+            <h2 style="color: white; margin-top: 0; margin-bottom: 20px; font-size: 1.8rem;">Compose Email to All
+                Members</h2>
+            <p style="color: var(--text-muted); margin-bottom: 25px; font-size: 0.95rem;">This will send an email to all
+                members in the database using the BCC field to protect their privacy.</p>
+
+            <form id="emailForm">
+                <div style="margin-bottom: 20px;">
+                    <label
+                        style="display: block; color: var(--color-cyan); margin-bottom: 8px; font-size: 0.9rem; font-weight: 500; text-transform: uppercase; letter-spacing: 1px;">Subject</label>
+                    <input type="text" id="emailSubject" required
+                        style="width: 100%; padding: 15px; border-radius: 12px; border: 1px solid rgba(255, 255, 255, 0.1); background: rgba(255, 255, 255, 0.05); color: white; font-family: inherit; font-size: 1rem; outline: none; transition: border-color 0.3s ease;">
+                </div>
+                <div style="margin-bottom: 30px;">
+                    <label
+                        style="display: block; color: var(--color-cyan); margin-bottom: 8px; font-size: 0.9rem; font-weight: 500; text-transform: uppercase; letter-spacing: 1px;">Message</label>
+                    <textarea id="emailMessage" required rows="6"
+                        style="width: 100%; padding: 15px; border-radius: 12px; border: 1px solid rgba(255, 255, 255, 0.1); background: rgba(255, 255, 255, 0.05); color: white; font-family: inherit; font-size: 1rem; outline: none; transition: border-color 0.3s ease; resize: vertical;"></textarea>
+                </div>
+
+                <div id="emailStatus"
+                    style="display: none; padding: 15px; border-radius: 10px; margin-bottom: 20px; text-align: center; font-weight: 500;">
+                </div>
+
+                <div style="display: flex; justify-content: flex-end; gap: 15px;">
+                    <button type="button" id="btnCancelEmail"
+                        style="background: transparent; border: 1px solid rgba(255,255,255,0.2); color: white; padding: 12px 25px; border-radius: 10px; cursor: pointer; font-family: inherit; font-size: 1rem; transition: all 0.3s ease;">Cancel</button>
+                    <button type="submit" id="btnSendEmail"
+                        style="background: var(--color-cyan); border: none; color: #0a0a0a; padding: 12px 30px; border-radius: 10px; cursor: pointer; font-family: inherit; font-size: 1rem; font-weight: 600; transition: all 0.3s ease;">Send
+                        Email 🚀</button>
+                </div>
+            </form>
+        </div>
+    </div>
 </body>
+
 </html>
